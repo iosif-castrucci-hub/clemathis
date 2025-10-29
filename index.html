@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clemathis – Golden Week</title>
+  <title>Inmediately – Create. Engage. Grow.</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --accent: #b03a8c;
+      --accent: #0EFDC8;
       --dark: #111;
       --light: #fff;
-      --gray: #f6f5f6;
+      --gray: #f6f7f8;
       --radius: 20px;
       --shadow: 0 10px 25px rgba(0,0,0,0.08);
       --max: 1100px;
@@ -31,19 +31,35 @@
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .nav-container {
       max-width: var(--max);
       margin: auto;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 12px 20px;
+      position: relative;
     }
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-weight: 800;
       font-size: 20px;
     }
+    .logo svg {
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 0 6px rgba(14,253,200,.5));
+    }
+
     .menu {
-      display: flex; gap: 18px; flex-wrap: wrap;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
     }
     .menu a {
       text-decoration: none;
@@ -53,10 +69,8 @@
       padding: 8px 12px;
       border-radius: 50px;
     }
-    .menu a:hover {
-      background: #f3edf4;
-      color: var(--accent);
-    }
+    .menu a:hover { background: #eafff8; color: #059e86; }
+
     .btn {
       background: var(--dark);
       color: var(--light);
@@ -70,17 +84,75 @@
     }
     .btn:hover { opacity: 0.9; }
 
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: var(--dark);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(7px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-7px);
+    }
+
+    /* Mobile Menu */
+    @media (max-width: 820px) {
+      .menu {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        border-bottom: 1px solid #eee;
+        padding: 0 20px;
+      }
+      .menu.open {
+        max-height: 90vh;
+        opacity: 1;
+        padding: 40px 20px;
+      }
+      .menu a {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--dark);
+      }
+      .desktop-btn { display: none; }
+      .mobile-btn {
+        background: var(--dark);
+        color: var(--light);
+        padding: 12px 22px;
+        border-radius: 50px;
+        margin-top: 20px;
+      }
+      .hamburger { display: flex; }
+    }
+
     /* Section Layout */
     section { scroll-margin-top: 90px; }
-    .container {
-      max-width: var(--max);
-      margin: auto;
-      padding: 70px 20px;
-    }
-    h1, h2, h3 {
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
+    .container { max-width: var(--max); margin: auto; padding: 70px 20px; }
+    h1, h2, h3 { margin-bottom: 16px; line-height: 1.2; }
     h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; }
     h2 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 800; }
     h3 { font-size: clamp(20px, 3vw, 26px); font-weight: 700; }
@@ -89,15 +161,16 @@
 
     /* Hero */
     #start {
-      background: linear-gradient(135deg, #fff 0%, #fce8f8 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #ebfffa 100%);
       text-align: center;
       padding: 100px 20px;
     }
     #start h1 { color: var(--dark); }
     #start .btn { margin-top: 24px; }
+    .kpi { margin-top: 15px; font-weight: 700; color: #059e86; }
 
-    /* Golden Week */
-    #golden-week { background: #fff; text-align: center; }
+    /* About */
+    #about { background: #fff; text-align: center; }
     .bullets {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -114,12 +187,12 @@
 
     /* Offer */
     #offer {
-      background: linear-gradient(135deg, var(--accent), #6a1b57);
+      background: linear-gradient(135deg, var(--accent), #059e86);
       color: #fff;
       text-align: center;
     }
     .offer-price {
-      font-size: clamp(48px, 7vw, 90px);
+      font-size: clamp(36px, 6vw, 72px);
       font-weight: 800;
       margin-bottom: 10px;
     }
@@ -130,7 +203,7 @@
       margin-top: 40px;
     }
     .offer-box {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.12);
       border-radius: var(--radius);
       padding: 24px;
       text-align: left;
@@ -149,9 +222,9 @@
       margin: 20px auto;
     }
 
-    /* Casi Studio */
-    #casi-studio {
-      background: linear-gradient(180deg, #fff 0%, #fdebf5 100%);
+    /* Case Studies */
+    #case-studies {
+      background: linear-gradient(180deg, #fff 0%, #ecfff9 100%);
       text-align: center;
     }
     .stats {
@@ -169,10 +242,7 @@
     }
 
     /* FAQ */
-    #faq {
-      background: #fdebf5;
-      text-align: center;
-    }
+    #faq { background: #eafff8; text-align: center; }
     details {
       background: #fff;
       border-radius: var(--radius);
@@ -182,11 +252,8 @@
       text-align: left;
       box-shadow: var(--shadow);
     }
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-    }
-    details[open] { background: #fff6fb; }
+    summary { cursor: pointer; font-weight: 700; }
+    details[open] { background: #f5fffb; }
 
     /* Footer */
     footer {
@@ -208,7 +275,7 @@
       text-decoration: none;
       font-weight: 600;
     }
-    footer .links a:hover { color: var(--accent); }
+    footer .links a:hover { color: #059e86; }
   </style>
 </head>
 <body>
@@ -216,39 +283,61 @@
   <!-- Navbar -->
   <nav>
     <div class="nav-container">
-      <div class="logo">CLEMATHIS</div>
-      <div class="menu">
+      <div class="logo" aria-label="Inmediately">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="g" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#0EFDC8"/>
+              <stop offset="100%" stop-color="#0EFDC8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="32" cy="32" r="24" fill="none" stroke="#0EFDC8" stroke-width="2" opacity=".8"/>
+          <circle cx="32" cy="32" r="28" fill="url(#g)" opacity=".35"/>
+          <rect x="30" y="22" width="4" height="18" rx="2" fill="#0EFDC8"/>
+          <circle cx="32" cy="18" r="3" fill="#0EFDC8"/>
+        </svg>
+        Inmediately
+      </div>
+
+      <button class="hamburger" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="menu" id="navMenu">
         <a href="#start">Start</a>
-        <a href="#golden-week">Golden Week</a>
+        <a href="#about">About Us</a>
         <a href="#offer">Offer</a>
         <a href="#social-proof">Social Proof</a>
-        <a href="#casi-studio">Casi Studio</a>
+        <a href="#case-studies">Case Studies</a>
         <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="btn mobile-btn" href="#contact">Start Now</a>
       </div>
-      <a class="btn" href="#footer">Prenota</a>
+
+      <a class="btn desktop-btn" href="#contact">Start Now</a>
     </div>
   </nav>
 
   <!-- Start -->
   <section id="start">
     <div class="container">
-      <h1>HAI MAI PENSATO CHE POTRESTI AUMENTARE I <span class="accent">GUADAGNI</span> DEL TUO CENTRO IN UNA SOLA SETTIMANA?</h1>
-      <p class="lead">Con la Golden Week Clemathis testi il Metodo DHEA, la tecnologia pro-age ad alto rendimento che trasforma ogni trattamento corpo in profitto.</p>
-      <a href="#footer" class="btn">Prenota La Tua Golden Week</a>
-      <p style="margin-top: 15px; font-weight: 700; color: var(--accent);">+8000€ IN 7 GIORNI*</p>
+      <h1>Build Your <span class="accent">Digital Presence</span> — Instantly.</h1>
+      <p class="lead">At <strong>Inmediately</strong>, we craft elegant websites and impactful video content that help your brand look professional and convert — fast.</p>
+      <a href="https://wa.me/1234567890?text=Hi%20Inmediately%2C%20I%27d%20like%20to%20start%20a%20project" class="btn" target="_blank" rel="noopener">Start Your Project on WhatsApp</a>
+      <p class="kpi">Create • Engage • Grow</p>
     </div>
   </section>
 
-  <!-- Golden Week -->
-  <section id="golden-week">
+  <!-- About -->
+  <section id="about">
     <div class="container">
-      <h2>ORGANIZZA LA TUA <span class="accent">GOLDEN WEEK</span> CON IL SUPPORTO COMPLETO <span class="accent">CLEMATHIS</span></h2>
-      <p class="lead"><strong>Macchinario DHEA</strong>, campagna pubblicitaria e beauty specialist per risultati visibili già dal primo giorno.</p>
-      <h3 style="margin-top:30px;">3 BULLET-BENEFIT CHIAVE</h3>
+      <h2>Why <span class="accent">Inmediately</span></h2>
+      <p class="lead"><strong>Web design</strong>, <strong>video storytelling</strong>, and <strong>launch strategy</strong> — everything you need to look sharp online in days, not months.</p>
+      <h3 style="margin-top:30px;">3 Key Benefits</h3>
       <div class="bullets">
-        <div class="card">Aumenta Gli Incassi Senza Investire In Nuove Attrezzature</div>
-        <div class="card">Offri Risultati Visibili E Duraturi Con Sedute Da 20 Minuti</div>
-        <div class="card">Attira Nuove Clienti Over 40, Il Target In Più Rapida Crescita</div>
+        <div class="card">Elegant, conversion-focused websites</div>
+        <div class="card">Short-form videos that sell your story</div>
+        <div class="card">Fast delivery and clear communication</div>
       </div>
     </div>
   </section>
@@ -256,57 +345,57 @@
   <!-- Offer -->
   <section id="offer">
     <div class="container">
-      <div class="offer-price">550€</div>
-      <h2>ORGANIZZA LA TUA GOLDEN WEEK CON IL SUPPORTO COMPLETO CLEMATHIS</h2>
-      <p>+ macchinario DHEA in uso + budget pubblicitario + affiancamento beauty specialist</p>
+      <div class="offer-price">Custom Project</div>
+      <h2>Everything you need to launch with confidence</h2>
+      <p>Responsive website • Promo video edit • Brand color & logo setup • SEO launch checklist</p>
       <div class="offer-benefits">
         <div class="offer-box">
-          <h3>Per il Centro Estetico</h3>
+          <h3>For Your Business</h3>
           <ul>
-            <li>Incassi immediati</li>
-            <li>Nuovi contatti</li>
-            <li>Ritorno rapido sull’investimento</li>
+            <li>Professional online image</li>
+            <li>Clear messaging that converts</li>
+            <li>Rapid time-to-launch</li>
           </ul>
         </div>
         <div class="offer-box">
-          <h3>Per le Clienti Finali</h3>
+          <h3>What’s Included</h3>
           <ul>
-            <li>Trattamenti pro-age</li>
-            <li>Risultati visibili</li>
-            <li>Zero fatica</li>
+            <li>Custom design & build</li>
+            <li>Video editing & export</li>
+            <li>Guided launch support</li>
           </ul>
         </div>
       </div>
-      <a href="#footer" class="btn" style="margin-top:30px;">Prenota La Tua Golden Week</a>
+      <a href="https://wa.me/1234567890?text=I%20need%20a%20quote%20for%20website%20%2B%20video" class="btn" style="margin-top:30px;" target="_blank" rel="noopener">Get a Quote on WhatsApp</a>
     </div>
   </section>
 
   <!-- Social Proof -->
   <section id="social-proof">
     <div class="container">
-      <h2>COSA DICONO I CENTRI CHE HANNO GIÀ TESTATO IL <span class="accent">METODO DHEA</span></h2>
+      <h2>What Clients Say</h2>
       <div class="testimonial">
-        <h4>Mara Lutteri – Titolare Green Harmony</h4>
-        <p>“Durante l’evento ho chiuso 9 pacchetti da 900€ ciascuno, per un totale di 8.100€. Ora ho clienti fidelizzate e un flusso di cassa ricorrente.”</p>
+        <h4>Laura M. — Café Owner</h4>
+        <p>“Inmediately made my business look professional in under a week. Website + video done — super smooth.”</p>
       </div>
       <div class="testimonial">
-        <h4>Cristina Piras – Centro Estetico</h4>
-        <p>“Con DHEA Longevity riesco a trasmettere ai clienti i benefici reali del trattamento. Finalmente risultati concreti e semplici da proporre.”</p>
+        <h4>Daniel R. — Photographer</h4>
+        <p>“Clean, modern, fast. My landing page converts 2× better now.”</p>
       </div>
     </div>
   </section>
 
-  <!-- Casi Studio -->
-  <section id="casi-studio">
+  <!-- Case Studies -->
+  <section id="case-studies">
     <div class="container">
-      <h2>RISULTATI REALI DEI CENTRI CHE HANNO ADERITO ALLA <span class="accent">GOLDEN WEEK</span></h2>
+      <h2>Real Results</h2>
       <div class="stats">
-        <div class="stat">17.100€<br><small>in un solo evento lancio</small></div>
-        <div class="stat">9 su 10<br><small>hanno acquistato anche il percorso mantenimento</small></div>
-        <div class="stat">+8000€<br><small>in 7 giorni</small></div>
-        <div class="stat">20 minuti<br><small>per seduta media</small></div>
+        <div class="stat">5 days<br><small>e-commerce launch</small></div>
+        <div class="stat">+230%<br><small>social engagement</small></div>
+        <div class="stat">95+<br><small>site speed score</small></div>
+        <div class="stat">20 mins<br><small>average promo edit</small></div>
       </div>
-      <h3 style="margin-top:40px;">VUOI ESSERE IL PROSSIMO CENTRO A <span class="accent">RADDOPPIARE GLI INCASSI</span> IN UNA SETTIMANA?</h3>
+      <h3 style="margin-top:40px;">Ready to <span class="accent">level up</span> your brand?</h3>
     </div>
   </section>
 
@@ -315,39 +404,53 @@
     <div class="container">
       <h2>FAQ</h2>
       <details>
-        <summary>1. Devo acquistare il macchinario?</summary>
-        <p>No, durante la Golden Week lo ricevi in uso temporaneo.</p>
+        <summary>1. How fast can you deliver?</summary>
+        <p>Most websites are ready in 5–7 days, depending on scope.</p>
       </details>
       <details>
-        <summary>2. Quanto costa l’organizzazione?</summary>
-        <p>Solo 550€, incluso marketing e affiancamento.</p>
+        <summary>2. Can you handle everything (domain, copy, video)?</summary>
+        <p>Yes — we coordinate the full process for you.</p>
       </details>
       <details>
-        <summary>3. Posso partecipare anche se non faccio già trattamenti corpo?</summary>
-        <p>Sì! Il Metodo DHEA è adatto anche ai centri estetici non specializzati.</p>
+        <summary>3. Do you offer post-launch support?</summary>
+        <p>We provide flexible maintenance and content update plans.</p>
       </details>
       <details>
-        <summary>4. Serve formazione specifica?</summary>
-        <p>No, la beauty specialist Clemathis ti segue passo dopo passo.</p>
+        <summary>4. How do we start?</summary>
+        <p>Message us on WhatsApp and we’ll reply with a clear plan.</p>
       </details>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer id="footer">
-    <h2>LE DATE PER LA <span class="accent">GOLDEN WEEK</span> SONO <span class="accent">LIMITATE</span></h2>
-    <p>Richiedi ora la tua settimana chiavi in mano e scopri come aumentare gli incassi del tuo centro.</p>
-    <a href="#start" class="btn" style="margin-top:20px;">Prenota La Tua Golden Week</a>
+  <!-- Contact / Footer -->
+  <footer id="contact">
+    <h2>Dates are <span class="accent">limited</span></h2>
+    <p>Start now and get a clean, conversion-ready presence for your brand.</p>
+    <a href="https://wa.me/1234567890?text=Hi%20Inmediately%2C%20let%27s%20start" class="btn" style="margin-top:20px;" target="_blank" rel="noopener">Chat on WhatsApp</a>
     <div style="margin-top:40px;">
-      <strong>Clemathis</strong><br>
-      info@clemathis.it<br>
-      Via Cadore 230, Seregno, Italy
+      <strong>Inmediately</strong><br>
+      <a href="mailto:info@inmediately.com">info@inmediately.com</a>
     </div>
     <div class="links">
       <a href="#">privacy policy</a>
-      <a href="#">contatti</a>
-      <a href="#">diretti</a>
+      <a href="#">contacts</a>
+      <a href="#start">back to top</a>
     </div>
   </footer>
+
+  <script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('active');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuBtn.classList.remove('active');
+      navMenu.classList.remove('open');
+    });
+  });
+  </script>
 </body>
 </html>
